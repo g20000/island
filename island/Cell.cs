@@ -43,24 +43,44 @@ namespace island
             this.pictureBoxGrass = pictureBoxGrass;
             this.pictureBoxSkySun = pictureBoxSkySun;
 
+            this.columnForCell = columnForCell;
+            this.rowForCell = rowForCell;
+
             this.context = context;
 
             createRainVisualControls();
+            createPictureBoxSkySun(pictureBoxSkySun);
+            createPictureBoxGrass(pictureBoxGrass);
 
             this.rain = new Rain(this.rainVisualControls);
             this.sun = new island.Sun(this.pictureBoxSkySun);
             this.grass = new island.Grass(this.pictureBoxGrass);
         }
 
+        public Rain getRain()
+        {
+            return this.rain;
+        }
+
+        public Sun getSun()
+        {
+            return this.sun;
+        }
+
+        public Grass getGrass()
+        {
+            return this.grass;
+        }
+
         private void createRainVisualControls()
         {
-            foreach (PictureBox pictureBox in this.rainVisualControls)
+            for (int indexForPictureBoxRainSource = 0; indexForPictureBoxRainSource < this.rainVisualControls.Length; ++indexForPictureBoxRainSource)
             {
-                createRainVisualControl(pictureBox);
+                createRainVisualControl((PictureBox)this.rainVisualControls[indexForPictureBoxRainSource], indexForPictureBoxRainSource);
             }
         }
 
-        private void createRainVisualControl(PictureBox pictureBoxRainSource)
+        private void createRainVisualControl(PictureBox pictureBoxRainSource, int indexForPictureBoxRainSource)
         {
             PictureBox pictureBoxRain = new PictureBox();
 
@@ -70,21 +90,29 @@ namespace island
             pictureBoxRain.Location = new Point(pictureBoxRainSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + 10, pictureBoxRainSource.Location.Y);
 
             this.context.Controls.Add(pictureBoxRain);
+            this.rainVisualControls[indexForPictureBoxRainSource] = pictureBoxRain;
         }
 
-        private void createPictureBoxRain()
+        private void createPictureBoxSkySun(PictureBox pictureBoxSkySunSource)
         {
+            this.pictureBoxSkySun = new PictureBox();
 
+            this.pictureBoxSkySun.Size = pictureBoxSkySunSource.Size;
+            this.pictureBoxSkySun.BackColor = pictureBoxSkySunSource.BackColor;
+            this.pictureBoxSkySun.Location = new Point(pictureBoxSkySunSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + 10, pictureBoxSkySunSource.Location.Y);
+
+            this.context.Controls.Add(this.pictureBoxSkySun);
         }
 
-        private void createPictureBoxSkySun()
+        private void createPictureBoxGrass(PictureBox pictureBoxGrassSource)
         {
+            this.pictureBoxGrass = new PictureBox();
 
-        }
+            this.pictureBoxGrass.Size = pictureBoxGrassSource.Size;
+            this.pictureBoxGrass.BackColor = pictureBoxGrassSource.BackColor;
+            this.pictureBoxGrass.Location = new Point(pictureBoxGrassSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + 10, pictureBoxGrassSource.Location.Y);
 
-        private void createPictureBoxGrass()
-        {
-
+            this.context.Controls.Add(this.pictureBoxGrass);
         }
     }
 }

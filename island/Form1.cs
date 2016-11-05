@@ -15,12 +15,13 @@ namespace island
     {
         Random rnd = null;
         Object[] rainVisualControls = null;
+        List<Cell> cells = new List<Cell>();
         Sun sun = null;
         Rain rain = null;
         Grass grass = null;
 
         int rowsCount = 0;
-        int columnCount = 2;
+        int columnCount = 3;
 
         public Form1()
         {
@@ -37,14 +38,14 @@ namespace island
 
             rnd = new Random();
 
-            for(int row = 0; row < rowsCount; ++row)
+            for(int column = 0; column < columnCount; ++column)
             {
-                new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.columnCount, this.rowsCount);
+                cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, column, this.rowsCount));
             }
 
-            /*rain = new Rain(rainVisualControls);
+            rain = new Rain(rainVisualControls);
             sun = new island.Sun(pictureBoxSkySun);
-            grass = new island.Grass(pictureBoxGrass);*/
+            grass = new island.Grass(pictureBoxGrass);
 
             timer1.Interval = 1000;
             timer1.Start();
@@ -58,11 +59,31 @@ namespace island
             }
         }
 
+        private void hideCellPrototype()
+        {
+            this.pictureBoxRain.Visible = false;
+            this.pictureBoxRain2.Visible = false;
+            this.pictureBoxRain3.Visible = false;
+
+            this.pictureBoxGrass.Visible = false;
+            this.pictureBoxSkySun.Visible = false;
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            rain.createRain(rnd.Next(0, 4));
-            sun.createSun(rnd.Next(0, 4));
-            grass.updateGrassStatus(rain.getRainState(), sun.getSunState());
+            hideCellPrototype();
+
+            foreach(Cell cell in this.cells)
+            {
+                cell.getRain().createRain(rnd.Next(0, 4));
+                cell.getSun().createSun(rnd.Next(0, 4));
+                cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState());
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

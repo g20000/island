@@ -18,7 +18,6 @@ namespace island
         }
 
         int rainState = 0;
-
         PictureBox pictureBoxRain;
         PictureBox pictureBoxRain2;
         PictureBox pictureBoxRain3;

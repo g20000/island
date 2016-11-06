@@ -10,7 +10,7 @@ namespace island
 {
     class Grass
     {
-        enum GrassHeight
+        public enum GrassHeight
         {
             GrassHeightAbsent,
             GrassHeightVeryWeak,

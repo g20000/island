@@ -16,9 +16,6 @@ namespace island
         Random rnd = null;
         Object[] rainVisualControls = null;
         List<Cell> cells = new List<Cell>();
-        Sun sun = null;
-        Rain rain = null;
-        Grass grass = null;
 
         int rowsCount = 3;
         int columnCount = 3;
@@ -33,9 +30,6 @@ namespace island
                 pictureBoxRain3
             };
 
-            //createCell();
-            //updateCell();
-
             rnd = new Random();
 
             for (int row = 0; row < rowsCount; ++row)
@@ -45,20 +39,35 @@ namespace island
                     cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, row));
                 }
             }
-            
-            rain = new Rain(rainVisualControls);
-            sun = new island.Sun(pictureBoxSkySun);
-            grass = new island.Grass(pictureBoxGrass);
+
+            initCells();
 
             timer1.Interval = 1000;
-            timer1.Start();
+        }
+
+        private void initCells()
+        {
+            hideCellPrototype();
+
+            foreach (Cell cell in this.cells)
+            {
+                cell.createRainOrLake(rnd.Next(0, 3));
+                cell.getRain().createRain(rnd.Next(0, 4));
+                cell.getSun().createSun(rnd.Next(0, 4));
+                cell.getGrass().createGrass((int)Grass.GrassHeight.GrassHeightAbsent);
+            }
         }
      
-        private void updateCell()
+        private void updateCells()
         {
-            while (true)
+            hideCellPrototype();
+
+            foreach (Cell cell in this.cells)
             {
-                
+                cell.createRainOrLake(rnd.Next(0, 3));
+                cell.getRain().createRain(rnd.Next(0, 4));
+                cell.getSun().createSun(rnd.Next(0, 4));
+                cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState(), cell.isMountainPresented(), cell.isLakePresented());
             }
         }
 
@@ -77,20 +86,27 @@ namespace island
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            hideCellPrototype();
-
-            foreach(Cell cell in this.cells)
-            {
-                cell.createRainOrLake(rnd.Next(0, 3));
-                cell.getRain().createRain(rnd.Next(0, 4));
-                cell.getSun().createSun(rnd.Next(0, 4));
-                cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState(), cell.isMountainPresented(), cell.isLakePresented());
-            }
+            updateCells();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void onStopClickedButtonTouched(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void onUpdateCellsOnceButtonTouched(object sender, EventArgs e)
+        {
+            updateCells();
         }
     }
 }

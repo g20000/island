@@ -40,7 +40,7 @@ namespace island
 
             for(int column = 0; column < columnCount; ++column)
             {
-                cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, column, this.rowsCount));
+                cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, this.rowsCount));
             }
 
             rain = new Rain(rainVisualControls);
@@ -75,9 +75,10 @@ namespace island
 
             foreach(Cell cell in this.cells)
             {
+                cell.createRainOrLake(rnd.Next(0, 2));
                 cell.getRain().createRain(rnd.Next(0, 4));
                 cell.getSun().createSun(rnd.Next(0, 4));
-                cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState());
+                cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState(), cell.isMountainPresented(), cell.isLakePresented());
             }
         }
 

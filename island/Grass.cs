@@ -29,11 +29,24 @@ namespace island
 
         int grassState = 0;
 
+        bool isLakePresented = false;
+        bool isMountainPresented = false;
+
         PictureBox pictureBoxGrass;
 
         public Grass(PictureBox pictureBox)
         {
             pictureBoxGrass = pictureBox;
+        }
+
+        public void setIsLakePresented(bool isLakePresented)
+        {
+            this.isLakePresented = isLakePresented;
+        }
+
+        public void setIsMountainPresented(bool isMountainPresented)
+        {
+            this.isMountainPresented = isMountainPresented;
         }
 
         public void createGrass(int strength)
@@ -85,7 +98,7 @@ namespace island
             createGrass((int)GrassHeight.GrassHeightAbsent);
         }
 
-        public void updateGrassStatus(int rainStatus, int sunStatus)
+        public void updateGrassStatus(int rainStatus, int sunStatus, bool mountainPresenseState, bool lakePresenceState)
         {
             if (isNeedGrowGrassUp(rainStatus, sunStatus))
             {

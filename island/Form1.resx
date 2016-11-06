@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>16, 13</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBoxRain.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxRain3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAADcBJREFUeF7t
         3XuMXGUZx3GKmHCRiIoxQgwm8A8I0YAxQqJpRG7dzjuKIPwBGDVAwkVQMBHwshgRNUEieAmG2gCxXc6c
@@ -182,7 +185,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6LPttvsvOnQoNArWMd4AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="pictureBoxRain.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxRain3.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAADcBJREFUeF7t
         3XuMXGUZx3GKmHCRiIoxQgwm8A8I0YAxQqJpRG7dzjuKIPwBGDVAwkVQMBHwshgRNUEieAmG2gCxXc6c
@@ -374,7 +377,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6LPttvsvOnQoNArWMd4AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="pictureBoxRain3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxRain.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAADcBJREFUeF7t
         3XuMXGUZx3GKmHCRiIoxQgwm8A8I0YAxQqJpRG7dzjuKIPwBGDVAwkVQMBHwshgRNUEieAmG2gCxXc6c
@@ -438,7 +441,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6LPttvsvOnQoNArWMd4AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="pictureBoxRain3.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxRain.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAADcBJREFUeF7t
         3XuMXGUZx3GKmHCRiIoxQgwm8A8I0YAxQqJpRG7dzjuKIPwBGDVAwkVQMBHwshgRNUEieAmG2gCxXc6c
@@ -502,9 +505,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6LPttvsvOnQoNArWMd4AAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>16, 13</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

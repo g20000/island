@@ -11,6 +11,12 @@ namespace island
     
     class Cell
     {
+        public enum LandscapeElement
+        {
+            LandscapeElementMountain,
+            LandscapeElementLake
+        }
+
         Object[] rainVisualControls = null;
         PictureBox pictureBoxRain = null;
         PictureBox pictureBoxRain1 = null;
@@ -18,6 +24,8 @@ namespace island
 
         PictureBox pictureBoxSkySun = null;
         PictureBox pictureBoxGrass = null;
+        PictureBox pictureBoxMountain = null;
+        PictureBox pictureBoxLake = null;
 
         Form context = null;
 
@@ -25,10 +33,12 @@ namespace island
         Rain rain = null;
         Grass grass = null;
 
+        bool isNeedSetLakeOrMountain = true;
+
         int columnForCell = 0;
         int rowForCell = 0;
 
-        public Cell(Form context, Object[] rainVisualControls, PictureBox pictureBoxGrass, PictureBox pictureBoxSkySun, int columnForCell, int rowForCell)
+        public Cell(Form context, Object[] rainVisualControls, PictureBox pictureBoxGrass, PictureBox pictureBoxSkySun, PictureBox pictureBoxMountain, PictureBox pictureBoxLake, int columnForCell, int rowForCell)
         {
             this.pictureBoxRain = (PictureBox)rainVisualControls[0];
             this.pictureBoxRain1 = (PictureBox)rainVisualControls[1];
@@ -42,6 +52,8 @@ namespace island
 
             this.pictureBoxGrass = pictureBoxGrass;
             this.pictureBoxSkySun = pictureBoxSkySun;
+            this.pictureBoxMountain = pictureBoxMountain;
+            this.pictureBoxLake = pictureBoxLake;
 
             this.columnForCell = columnForCell;
             this.rowForCell = rowForCell;
@@ -70,6 +82,42 @@ namespace island
         public Grass getGrass()
         {
             return this.grass;
+        }
+
+        public bool isMountainPresented()
+        {
+            return this.pictureBoxMountain.Visible;
+        }
+
+        public bool isLakePresented()
+        {
+            return this.pictureBoxLake.Visible;
+        }
+
+        public void createRainOrLake(int landscapeElement)
+        {
+            if ((landscapeElement == (int)LandscapeElement.LandscapeElementMountain) && this.isNeedSetLakeOrMountain)
+            {
+                createMountain();
+            } else {
+                createLake();
+            }
+        }
+
+        private void createMountain()
+        {
+            this.pictureBoxMountain.Visible = true;
+            this.pictureBoxLake.Visible = false;
+
+            this.isNeedSetLakeOrMountain = false;
+        }
+
+        private void createLake()
+        {
+            this.pictureBoxLake.Visible = true;
+            this.pictureBoxMountain.Visible = false;
+
+            this.isNeedSetLakeOrMountain = false;
         }
 
         private void createRainVisualControls()

@@ -14,7 +14,14 @@ namespace island
         public enum LandscapeElement
         {
             LandscapeElementMountain,
-            LandscapeElementLake
+            LandscapeElementLake,
+            LandscapeElementGrassOnly
+        }
+
+        private enum CellOffset
+        {
+            CellOffsetVertical = 0,
+            CellOffsetHorizontal = 10
         }
 
         Object[] rainVisualControls = null;
@@ -52,14 +59,16 @@ namespace island
 
             this.pictureBoxGrass = pictureBoxGrass;
             this.pictureBoxSkySun = pictureBoxSkySun;
-            this.pictureBoxMountain = pictureBoxMountain;
-            this.pictureBoxLake = pictureBoxLake;
+            /*this.pictureBoxMountain = pictureBoxMountain;
+            this.pictureBoxLake = pictureBoxLake;*/
 
             this.columnForCell = columnForCell;
             this.rowForCell = rowForCell;
 
             this.context = context;
 
+            createPictureBoxMountain(pictureBoxMountain);
+            createPictureBoxLake(pictureBoxLake);
             createRainVisualControls();
             createPictureBoxSkySun(pictureBoxSkySun);
             createPictureBoxGrass(pictureBoxGrass);
@@ -96,11 +105,24 @@ namespace island
 
         public void createRainOrLake(int landscapeElement)
         {
-            if ((landscapeElement == (int)LandscapeElement.LandscapeElementMountain) && this.isNeedSetLakeOrMountain)
+            if (!this.isNeedSetLakeOrMountain)
             {
-                createMountain();
-            } else {
-                createLake();
+                return;
+            }
+
+            switch (landscapeElement)
+            {
+                case (int)LandscapeElement.LandscapeElementMountain:
+                    createMountain();
+                    break;
+                case (int)LandscapeElement.LandscapeElementLake:
+                    createLake();
+                    break;
+                case (int)LandscapeElement.LandscapeElementGrassOnly:
+                    createGrassOnly();
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -115,6 +137,14 @@ namespace island
         private void createLake()
         {
             this.pictureBoxLake.Visible = true;
+            this.pictureBoxMountain.Visible = false;
+
+            this.isNeedSetLakeOrMountain = false;
+        }
+
+        private void createGrassOnly()
+        {
+            this.pictureBoxLake.Visible = false;
             this.pictureBoxMountain.Visible = false;
 
             this.isNeedSetLakeOrMountain = false;
@@ -135,7 +165,11 @@ namespace island
             pictureBoxRain.Size = pictureBoxRainSource.Size;
             pictureBoxRain.Image = pictureBoxRainSource.Image;
             pictureBoxRain.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBoxRain.Location = new Point(pictureBoxRainSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + 10, pictureBoxRainSource.Location.Y);
+
+            int offsetHorizontal = pictureBoxRainSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
+            int offsetVertical = pictureBoxRainSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;
+            
+            pictureBoxRain.Location = new Point(offsetHorizontal, offsetVertical);
 
             this.context.Controls.Add(pictureBoxRain);
             this.rainVisualControls[indexForPictureBoxRainSource] = pictureBoxRain;
@@ -147,7 +181,11 @@ namespace island
 
             this.pictureBoxSkySun.Size = pictureBoxSkySunSource.Size;
             this.pictureBoxSkySun.BackColor = pictureBoxSkySunSource.BackColor;
-            this.pictureBoxSkySun.Location = new Point(pictureBoxSkySunSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + 10, pictureBoxSkySunSource.Location.Y);
+
+            int offsetHorizontal = pictureBoxSkySunSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
+            int offsetVertical = pictureBoxSkySunSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;
+
+            this.pictureBoxSkySun.Location = new Point(offsetHorizontal, offsetVertical);
 
             this.context.Controls.Add(this.pictureBoxSkySun);
         }
@@ -158,9 +196,45 @@ namespace island
 
             this.pictureBoxGrass.Size = pictureBoxGrassSource.Size;
             this.pictureBoxGrass.BackColor = pictureBoxGrassSource.BackColor;
-            this.pictureBoxGrass.Location = new Point(pictureBoxGrassSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + 10, pictureBoxGrassSource.Location.Y);
+
+            int offsetHorizontal = pictureBoxGrassSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
+            int offsetVertical = pictureBoxGrassSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;
+
+            this.pictureBoxGrass.Location = new Point(offsetHorizontal, offsetVertical);
 
             this.context.Controls.Add(this.pictureBoxGrass);
+        }
+
+        private void createPictureBoxMountain(PictureBox pictureBoxMountainSource)
+        {
+            this.pictureBoxMountain = new PictureBox();
+
+            pictureBoxMountain.Size = pictureBoxMountainSource.Size;
+            pictureBoxMountain.Image = pictureBoxMountainSource.Image;
+            pictureBoxMountain.SizeMode = PictureBoxSizeMode.Zoom;
+
+            int offsetHorizontal = pictureBoxMountainSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
+            int offsetVertical = pictureBoxMountainSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;
+
+            this.pictureBoxMountain.Location = new Point(offsetHorizontal, offsetVertical);
+
+            this.context.Controls.Add(this.pictureBoxMountain);
+        }
+
+        private void createPictureBoxLake(PictureBox pictureBoxLakeSource)
+        {
+            this.pictureBoxLake = new PictureBox();
+
+            pictureBoxLake.Size = pictureBoxLakeSource.Size;
+            pictureBoxLake.Image = pictureBoxLakeSource.Image;
+            pictureBoxLake.SizeMode = PictureBoxSizeMode.Zoom;
+
+            int offsetHorizontal = pictureBoxLakeSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
+            int offsetVertical = pictureBoxLakeSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;
+
+            this.pictureBoxLake.Location = new Point(offsetHorizontal, offsetVertical);
+
+            this.context.Controls.Add(this.pictureBoxLake);
         }
     }
 }

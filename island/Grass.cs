@@ -100,6 +100,19 @@ namespace island
 
         public void updateGrassStatus(int rainStatus, int sunStatus, bool mountainPresenseState, bool lakePresenceState)
         {
+            if (mountainPresenseState || lakePresenceState)
+            {
+                if (mountainPresenseState)
+                {
+                    killGrass();
+                } else if (sunStatus != (int)Sun.SunStrength.SunStrengthAbsent) {
+                    growGrassUp();
+                }
+
+                return;
+            }
+
+
             if (isNeedGrowGrassUp(rainStatus, sunStatus))
             {
                 growGrassUp();

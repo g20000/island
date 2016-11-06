@@ -20,7 +20,7 @@ namespace island
         Rain rain = null;
         Grass grass = null;
 
-        int rowsCount = 0;
+        int rowsCount = 3;
         int columnCount = 3;
 
         public Form1()
@@ -38,11 +38,14 @@ namespace island
 
             rnd = new Random();
 
-            for(int column = 0; column < columnCount; ++column)
+            for (int row = 0; row < rowsCount; ++row)
             {
-                cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, this.rowsCount));
+                for (int column = 0; column < columnCount; ++column)
+                {
+                    cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, row));
+                }
             }
-
+            
             rain = new Rain(rainVisualControls);
             sun = new island.Sun(pictureBoxSkySun);
             grass = new island.Grass(pictureBoxGrass);
@@ -67,6 +70,9 @@ namespace island
 
             this.pictureBoxGrass.Visible = false;
             this.pictureBoxSkySun.Visible = false;
+
+            this.pictureBoxMountain.Visible = false;
+            this.pictureBoxLake.Visible = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -75,7 +81,7 @@ namespace island
 
             foreach(Cell cell in this.cells)
             {
-                cell.createRainOrLake(rnd.Next(0, 2));
+                cell.createRainOrLake(rnd.Next(0, 3));
                 cell.getRain().createRain(rnd.Next(0, 4));
                 cell.getSun().createSun(rnd.Next(0, 4));
                 cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState(), cell.isMountainPresented(), cell.isLakePresented());

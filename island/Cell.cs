@@ -29,6 +29,11 @@ namespace island
         PictureBox pictureBoxRain1 = null;
         PictureBox pictureBoxRain2 = null;
 
+        Object[] squirrelsVisualControls = null;
+        PictureBox pictureBoxSquirrel = null;
+        PictureBox pictureBoxSquirrel1 = null;
+        PictureBox pictureBoxSquirrel2 = null;
+
         PictureBox pictureBoxSkySun = null;
         PictureBox pictureBoxGrass = null;
         PictureBox pictureBoxMountain = null;
@@ -39,13 +44,14 @@ namespace island
         Sun sun = null;
         Rain rain = null;
         Grass grass = null;
+        SquirrelPopulation squirrelPopulation = null;
 
         bool isNeedSetLakeOrMountain = true;
 
         int columnForCell = 0;
         int rowForCell = 0;
 
-        public Cell(Form context, Object[] rainVisualControls, PictureBox pictureBoxGrass, PictureBox pictureBoxSkySun, PictureBox pictureBoxMountain, PictureBox pictureBoxLake, int columnForCell, int rowForCell)
+        public Cell(Form context, Object[] rainVisualControls, Object[] squirellsVisualControls, PictureBox pictureBoxGrass, PictureBox pictureBoxSkySun, PictureBox pictureBoxMountain, PictureBox pictureBoxLake, int columnForCell, int rowForCell)
         {
             this.pictureBoxRain = (PictureBox)rainVisualControls[0];
             this.pictureBoxRain1 = (PictureBox)rainVisualControls[1];
@@ -55,6 +61,16 @@ namespace island
                 this.pictureBoxRain,
                 this.pictureBoxRain1,
                 this.pictureBoxRain2
+            };
+
+            this.pictureBoxSquirrel = (PictureBox)squirellsVisualControls[0];
+            this.pictureBoxSquirrel1 = (PictureBox)squirellsVisualControls[1];
+            this.pictureBoxSquirrel2 = (PictureBox)squirellsVisualControls[2];
+
+            this.squirrelsVisualControls = new Object[]{
+                this.pictureBoxSquirrel,
+                this.pictureBoxSquirrel1,
+                this.pictureBoxSquirrel2
             };
 
             this.pictureBoxGrass = pictureBoxGrass;
@@ -70,12 +86,19 @@ namespace island
             createPictureBoxMountain(pictureBoxMountain);
             createPictureBoxLake(pictureBoxLake);
             createRainVisualControls();
+            createSquirrelsVisualControls();
             createPictureBoxSkySun(pictureBoxSkySun);
             createPictureBoxGrass(pictureBoxGrass);
 
             this.rain = new Rain(this.rainVisualControls);
             this.sun = new island.Sun(this.pictureBoxSkySun);
             this.grass = new island.Grass(this.pictureBoxGrass);
+            this.squirrelPopulation = new island.SquirrelPopulation(this.squirrelsVisualControls);
+        }
+
+        public SquirrelPopulation getSquirrelPopulation()
+        {
+            return this.squirrelPopulation;
         }
 
         public Rain getRain()
@@ -173,6 +196,31 @@ namespace island
 
             this.context.Controls.Add(pictureBoxRain);
             this.rainVisualControls[indexForPictureBoxRainSource] = pictureBoxRain;
+        }
+
+        private void createSquirrelsVisualControls()
+        {
+            for (int indexForPictureBoxSquirrelSource = 0; indexForPictureBoxSquirrelSource < this.squirrelsVisualControls.Length; ++indexForPictureBoxSquirrelSource)
+            {
+                createSquirrelVisualControl((PictureBox)this.squirrelsVisualControls[indexForPictureBoxSquirrelSource], indexForPictureBoxSquirrelSource);
+            }
+        }
+
+        private void createSquirrelVisualControl(PictureBox pictureBoxSquirrelSource, int indexForPictureBoxSquirrelSource)
+        {
+            PictureBox pictureBoxSquirrel = new PictureBox();
+
+            pictureBoxSquirrel.Size = pictureBoxSquirrelSource.Size;
+            pictureBoxSquirrel.Image = pictureBoxSquirrelSource.Image;
+            pictureBoxSquirrel.SizeMode = PictureBoxSizeMode.Zoom;
+
+            int offsetHorizontal = pictureBoxSquirrelSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
+            int offsetVertical = pictureBoxSquirrelSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;
+
+            pictureBoxSquirrel.Location = new Point(offsetHorizontal, offsetVertical);
+
+            this.context.Controls.Add(pictureBoxSquirrel);
+            this.squirrelsVisualControls[indexForPictureBoxSquirrelSource] = pictureBoxSquirrel;
         }
 
         private void createPictureBoxSkySun(PictureBox pictureBoxSkySunSource)

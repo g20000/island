@@ -15,10 +15,11 @@ namespace island
     {
         Random rnd = null;
         Object[] rainVisualControls = null;
+        Object[] squirrelsVisualControls = null;
         List<Cell> cells = new List<Cell>();
 
-        int rowsCount = 3;
-        int columnCount = 3;
+        int rowsCount = 10;
+        int columnCount = 10;
 
         public Form1()
         {
@@ -30,13 +31,20 @@ namespace island
                 pictureBoxRain3
             };
 
+            this.squirrelsVisualControls = new Object[]
+            {
+                this.pictureBoxSquirrel,
+                this.pictureBoxSquirrel2,
+                this.pictureBoxSquirrel3
+            };
+
             rnd = new Random();
 
             for (int row = 0; row < rowsCount; ++row)
             {
                 for (int column = 0; column < columnCount; ++column)
                 {
-                    cells.Add(new Cell(this, this.rainVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, row));
+                    cells.Add(new Cell(this, this.rainVisualControls, this.squirrelsVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, row));
                 }
             }
 
@@ -66,6 +74,7 @@ namespace island
             {
                 cell.createRainOrLake(rnd.Next(0, 3));
                 cell.getRain().createRain(rnd.Next(0, 4));
+                cell.getSquirrelPopulation().createSquirrelPopulation(rnd.Next(0, 4));
                 cell.getSun().createSun(rnd.Next(0, 4));
                 cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState(), cell.isMountainPresented(), cell.isLakePresented());
             }
@@ -107,6 +116,11 @@ namespace island
         private void onUpdateCellsOnceButtonTouched(object sender, EventArgs e)
         {
             updateCells();
+        }
+
+        private void pictureBoxLake_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

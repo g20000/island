@@ -83,6 +83,16 @@ namespace island.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_squirel {
+            get {
+                object obj = ResourceManager.GetObject("icon-squirel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap kaplja {
             get {
                 object obj = ResourceManager.GetObject("kaplja", resourceCulture);

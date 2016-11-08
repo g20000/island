@@ -49,6 +49,11 @@ namespace island
             this.isMountainPresented = isMountainPresented;
         }
 
+        public int getGrassState()
+        {
+            return this.grassState;
+        }
+
         public void createGrass(int strength)
         {
             grassState = strength;

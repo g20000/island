@@ -116,6 +116,16 @@ namespace island
             return this.grass;
         }
 
+        public int getColumnForCell()
+        {
+            return this.columnForCell;
+        }
+
+        public int getRowForCell()
+        {
+            return this.rowForCell;
+        }
+
         public bool isMountainPresented()
         {
             return this.pictureBoxMountain.Visible;
@@ -147,6 +157,11 @@ namespace island
                 default:
                     break;
             }
+        }
+
+        public bool isNeedReplaceSquirrel()
+        {
+            return ((this.getGrass().getGrassState() - this.squirrelPopulation.getSquirrelPopulationState()) < 0);
         }
 
         private void createMountain()

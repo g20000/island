@@ -91,7 +91,21 @@ namespace island
 
             this.pictureBoxMountain.Visible = false;
             this.pictureBoxLake.Visible = false;
+
+            this.pictureBoxSquirrel.Visible = false;
+            this.pictureBoxSquirrel2.Visible = false;
+            this.pictureBoxSquirrel3.Visible = false;
         }
+
+        private bool isIncreasePopulationAvailable(Cell cell)
+        {
+            return ((cell.getGrass().getGrassState() - cell.getSquirrelPopulation().getSquirrelPopulationState()) > 0);
+        }
+
+        /*private Cell getNearCellWithFreeSpaceForSquirrel(Cell cell)
+        {
+
+        }*/
 
         private void timer1_Tick(object sender, EventArgs e)
         {

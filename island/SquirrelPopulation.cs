@@ -53,6 +53,22 @@ namespace island
             }
         }
 
+        public void increaseSquirrelPopulation()
+        {
+            if (getSquirrelPopulationState() < 3)
+            {
+                ++this.squirrelPopulationState;
+            }
+        }
+
+        public void decreaseSquirrelPopulation()
+        {
+            if (getSquirrelPopulationState() > 0)
+            {
+                --this.squirrelPopulationState;
+            }
+        }
+
         private void createSquirrelPopulationAbsent()
         {
             this.pictureBoxSquirrel.Visible = false;

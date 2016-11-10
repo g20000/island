@@ -44,6 +44,11 @@
             this.pictureBoxRain = new System.Windows.Forms.PictureBox();
             this.pictureBoxGrass = new System.Windows.Forms.PictureBox();
             this.pictureBoxSkySun = new System.Windows.Forms.PictureBox();
+            this.textBoxRows = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxColumns = new System.Windows.Forms.TextBox();
+            this.buttonSetRowsAndColumns = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquirrel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquirrel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquirrel)).BeginInit();
@@ -203,11 +208,58 @@
             this.pictureBoxSkySun.TabIndex = 1;
             this.pictureBoxSkySun.TabStop = false;
             // 
+            // textBoxRows
+            // 
+            this.textBoxRows.Location = new System.Drawing.Point(381, 12);
+            this.textBoxRows.Name = "textBoxRows";
+            this.textBoxRows.Size = new System.Drawing.Size(60, 20);
+            this.textBoxRows.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(336, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Ряды";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(463, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Колонки";
+            // 
+            // textBoxColumns
+            // 
+            this.textBoxColumns.Location = new System.Drawing.Point(519, 12);
+            this.textBoxColumns.Name = "textBoxColumns";
+            this.textBoxColumns.Size = new System.Drawing.Size(72, 20);
+            this.textBoxColumns.TabIndex = 17;
+            // 
+            // buttonSetRowsAndColumns
+            // 
+            this.buttonSetRowsAndColumns.Location = new System.Drawing.Point(630, 10);
+            this.buttonSetRowsAndColumns.Name = "buttonSetRowsAndColumns";
+            this.buttonSetRowsAndColumns.Size = new System.Drawing.Size(75, 23);
+            this.buttonSetRowsAndColumns.TabIndex = 18;
+            this.buttonSetRowsAndColumns.Text = "Готово";
+            this.buttonSetRowsAndColumns.UseVisualStyleBackColor = true;
+            this.buttonSetRowsAndColumns.Click += new System.EventHandler(this.onSetRowsAndColumnsButtonTouched);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(957, 460);
+            this.Controls.Add(this.buttonSetRowsAndColumns);
+            this.Controls.Add(this.textBoxColumns);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxRows);
             this.Controls.Add(this.pictureBoxSquirrel2);
             this.Controls.Add(this.pictureBoxSquirrel3);
             this.Controls.Add(this.pictureBoxSquirrel);
@@ -235,6 +287,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGrass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSkySun)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -253,6 +306,11 @@
         private System.Windows.Forms.PictureBox pictureBoxSquirrel;
         private System.Windows.Forms.PictureBox pictureBoxSquirrel3;
         private System.Windows.Forms.PictureBox pictureBoxSquirrel2;
+        private System.Windows.Forms.TextBox textBoxRows;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxColumns;
+        private System.Windows.Forms.Button buttonSetRowsAndColumns;
     }
 }
 

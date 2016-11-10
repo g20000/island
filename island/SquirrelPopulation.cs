@@ -58,6 +58,7 @@ namespace island
             if (getSquirrelPopulationState() < 3)
             {
                 ++this.squirrelPopulationState;
+                createSquirrelPopulation(this.squirrelPopulationState);
             }
         }
 
@@ -66,6 +67,7 @@ namespace island
             if (getSquirrelPopulationState() > 0)
             {
                 --this.squirrelPopulationState;
+                createSquirrelPopulation(this.squirrelPopulationState);
             }
         }
 

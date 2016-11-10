@@ -128,6 +128,13 @@ namespace island
             }
         }
 
+        public void updateGrassStatusWithSquirrelPopulation(int squirrelPopulationStatus)
+        {
+            int futureGrassState = ((this.getGrassState() - squirrelPopulationStatus) > 0) ? (this.getGrassState() - squirrelPopulationStatus) : 0;
+
+            createGrass(futureGrassState);
+        }
+
         public bool isNeedGrowGrassUp(int rainStatus, int sunStatus)
         {
             return (

@@ -18,8 +18,8 @@ namespace island
         Object[] squirrelsVisualControls = null;
         List<Cell> cells = new List<Cell>();
 
-        int rowsCount = 10;
-        int columnCount = 10;
+        int rowsCount = 5;
+        int columnCount = 5;
 
         public Form1()
         {
@@ -61,8 +61,10 @@ namespace island
             {
                 cell.createRainOrLake(rnd.Next(0, 3));
                 cell.getRain().createRain(rnd.Next(0, 4));
+                cell.getSquirrelPopulation().createSquirrelPopulation(rnd.Next(0, 4));
                 cell.getSun().createSun(rnd.Next(0, 4));
-                cell.getGrass().createGrass((int)Grass.GrassHeight.GrassHeightAbsent);
+                //cell.getGrass().createGrass((int)Grass.GrassHeight.GrassHeightAbsent);
+                cell.getGrass().createGrass(rnd.Next(0, 4));
             }
         }
      
@@ -70,13 +72,39 @@ namespace island
         {
             hideCellPrototype();
 
+            updateWheather();
+            replaceSquirrels();
+            updateGrass();
+            replaceSquirrels();
+        }
+
+        private void updateWheather()
+        {
             foreach (Cell cell in this.cells)
             {
                 cell.createRainOrLake(rnd.Next(0, 3));
                 cell.getRain().createRain(rnd.Next(0, 4));
-                cell.getSquirrelPopulation().createSquirrelPopulation(rnd.Next(0, 4));
                 cell.getSun().createSun(rnd.Next(0, 4));
                 cell.getGrass().updateGrassStatus(cell.getRain().getRainState(), cell.getSun().getSunState(), cell.isMountainPresented(), cell.isLakePresented());
+            }
+        }
+
+        private void updateGrass()
+        {
+            foreach (Cell cell in this.cells)
+            {
+                cell.getGrass().updateGrassStatusWithSquirrelPopulation(cell.getSquirrelPopulation().getSquirrelPopulationState());
+            }
+        }
+
+        private void reproductSqurrels()
+        {
+            foreach (Cell cell in this.cells)
+            {
+                if (cell.getSquirrelPopulation().getSquirrelPopulationState() == (int)SquirrelPopulation.SquirrelPopulationLevel.SquirrelPopulationLevelMiddle)
+                {
+                    cell.getSquirrelPopulation().createSquirrelPopulation((int)SquirrelPopulation.SquirrelPopulationLevel.SquirrelPopulationLevelHigh);
+                }
             }
         }
 
@@ -97,15 +125,93 @@ namespace island
             this.pictureBoxSquirrel3.Visible = false;
         }
 
+        private bool isDecreasePopulationNeeded(Cell cell)
+        {
+            return ((cell.getGrass().getGrassState() - cell.getSquirrelPopulation().getSquirrelPopulationState()) < 0);
+        }
+
         private bool isIncreasePopulationAvailable(Cell cell)
         {
             return ((cell.getGrass().getGrassState() - cell.getSquirrelPopulation().getSquirrelPopulationState()) > 0);
         }
 
-        /*private Cell getNearCellWithFreeSpaceForSquirrel(Cell cell)
+        private void replaceSquirrels()
         {
+            foreach(Cell cell in this.cells)
+            {
+                while (isDecreasePopulationNeeded(cell))
+                {
+                    Cell[] nearSelectedCellArray = getNearCellWithFreeSpaceForSquirrel(cell);
+                    if (nearSelectedCellArray.Length > 0)
+                    {
+                        Cell nearSelectedCell = nearSelectedCellArray.First<Cell>();
 
-        }*/
+                        nearSelectedCell.getSquirrelPopulation().increaseSquirrelPopulation();
+                        cell.getSquirrelPopulation().decreaseSquirrelPopulation();
+                    } else
+                    {
+                        cell.getSquirrelPopulation().decreaseSquirrelPopulation();
+                    }
+                }
+            }
+        }
+
+        private Cell[] getNearCellWithFreeSpaceForSquirrel(Cell cellSource)
+        {
+            foreach(Cell cell in this.cells)
+            {
+                if (isCellNearAbove(cellSource, cell))
+                {
+                    if (isIncreasePopulationAvailable(cell))
+                    {
+                        return new Cell[] { cell };
+                    }
+                }
+
+                if (isCellNearRightAndLeft(cellSource, cell))
+                {
+                    if (isIncreasePopulationAvailable(cell))
+                    {
+                        return new Cell[] { cell };
+                    }
+                }
+
+                if (isCellNearBottom(cellSource, cell))
+                {
+                    if (isIncreasePopulationAvailable(cell))
+                    {
+                        return new Cell[] { cell };
+                    }
+                }             
+            }
+
+            return new Cell[] { };
+        }
+
+        private bool isCellNearAbove(Cell cellSource, Cell cellDestionation)
+        {
+            return (
+                        (((cellDestionation.getRowForCell() - 1) >= 0) && ((cellDestionation.getRowForCell() - 1) == (cellSource.getRowForCell() - 1))) &&
+                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() + 1) == (cellSource.getColumnForCell() + 1)))
+                   );
+        }
+
+        private bool isCellNearRightAndLeft(Cell cellSource, Cell cellDestionation)
+        {
+            return (
+                        (cellDestionation.getRowForCell() == cellSource.getRowForCell()) &&
+                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() + 1) == (cellSource.getColumnForCell() + 1))) &&
+                        (cellDestionation.getColumnForCell() != cellSource.getColumnForCell())
+                   );
+        }
+
+        private bool isCellNearBottom(Cell cellSource, Cell cellDestionation)
+        {
+            return (
+                        (((cellDestionation.getRowForCell() + 1) > this.rowsCount) && ((cellDestionation.getRowForCell() + 1) == (cellSource.getRowForCell() + 1))) &&
+                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() + 1) == (cellSource.getColumnForCell() + 1)))
+                   );
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -133,6 +239,11 @@ namespace island
         }
 
         private void pictureBoxLake_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void onSetRowsAndColumnsButtonTouched(object sender, EventArgs e)
         {
 
         }

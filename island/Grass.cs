@@ -158,5 +158,10 @@ namespace island
         {
             return (((int)Rain.RainStrength.RainStrengthHigh == rainStatus) && ((int)Sun.SunStrength.SunStrengthAbsent == sunStatus));
         }
+
+        public void clearControls()
+        {
+            this.pictureBoxGrass = null;
+        }
     }
 }

@@ -84,5 +84,12 @@ namespace island
         {
             return rainState;
         }
+
+        public void clearControls()
+        {
+            this.pictureBoxRain = null;
+            this.pictureBoxRain2 = null;
+            this.pictureBoxRain3 = null;
+        }
     }
 }

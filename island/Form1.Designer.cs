@@ -210,7 +210,7 @@
             // 
             // textBoxRows
             // 
-            this.textBoxRows.Location = new System.Drawing.Point(381, 12);
+            this.textBoxRows.Location = new System.Drawing.Point(351, 12);
             this.textBoxRows.Name = "textBoxRows";
             this.textBoxRows.Size = new System.Drawing.Size(60, 20);
             this.textBoxRows.TabIndex = 14;
@@ -218,7 +218,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(336, 15);
+            this.label1.Location = new System.Drawing.Point(311, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 15;
@@ -227,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(463, 15);
+            this.label2.Location = new System.Drawing.Point(426, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 16;
@@ -235,14 +235,14 @@
             // 
             // textBoxColumns
             // 
-            this.textBoxColumns.Location = new System.Drawing.Point(519, 12);
+            this.textBoxColumns.Location = new System.Drawing.Point(482, 10);
             this.textBoxColumns.Name = "textBoxColumns";
             this.textBoxColumns.Size = new System.Drawing.Size(72, 20);
             this.textBoxColumns.TabIndex = 17;
             // 
             // buttonSetRowsAndColumns
             // 
-            this.buttonSetRowsAndColumns.Location = new System.Drawing.Point(630, 10);
+            this.buttonSetRowsAndColumns.Location = new System.Drawing.Point(569, 9);
             this.buttonSetRowsAndColumns.Name = "buttonSetRowsAndColumns";
             this.buttonSetRowsAndColumns.Size = new System.Drawing.Size(75, 23);
             this.buttonSetRowsAndColumns.TabIndex = 18;

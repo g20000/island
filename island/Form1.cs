@@ -18,8 +18,8 @@ namespace island
         Object[] squirrelsVisualControls = null;
         List<Cell> cells = new List<Cell>();
 
-        int rowsCount = 5;
-        int columnCount = 5;
+        int rowsCount = 1;
+        int columnCount = 1;
 
         public Form1()
         {
@@ -38,15 +38,7 @@ namespace island
                 this.pictureBoxSquirrel3
             };
 
-            rnd = new Random();
-
-            for (int row = 0; row < rowsCount; ++row)
-            {
-                for (int column = 0; column < columnCount; ++column)
-                {
-                    cells.Add(new Cell(this, this.rainVisualControls, this.squirrelsVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, row));
-                }
-            }
+            this.rnd = new Random();
 
             initCells();
 
@@ -55,6 +47,14 @@ namespace island
 
         private void initCells()
         {
+            for (int row = 0; row < this.rowsCount; ++row)
+            {
+                for (int column = 0; column < this.columnCount; ++column)
+                {
+                    cells.Add(new Cell(this, this.rainVisualControls, this.squirrelsVisualControls, this.pictureBoxGrass, this.pictureBoxSkySun, this.pictureBoxMountain, this.pictureBoxLake, column, row));
+                }
+            }
+
             hideCellPrototype();
 
             foreach (Cell cell in this.cells)
@@ -245,7 +245,21 @@ namespace island
 
         private void onSetRowsAndColumnsButtonTouched(object sender, EventArgs e)
         {
+            
+            this.columnCount = (!string.IsNullOrWhiteSpace(this.textBoxColumns.Text)) ? Int32.Parse(this.textBoxColumns.Text) : 1;
+            this.rowsCount = (!string.IsNullOrWhiteSpace(this.textBoxRows.Text)) ? Int32.Parse(this.textBoxRows.Text) : 1;
 
+            
+
+            foreach (Cell cell in this.cells)
+            {
+                cell.clearControls();
+            }
+
+
+            this.cells.Clear();
+
+            initCells();
         }
     }
 }

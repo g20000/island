@@ -55,6 +55,11 @@ namespace island
             }
         }
 
+        public void clearControlls()
+        {
+            this.pictureBoxSkySun = null;
+        }
+
         public int getSunState()
         {
             return sunState;

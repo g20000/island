@@ -53,6 +53,8 @@ namespace island
 
         public Cell(Form context, Object[] rainVisualControls, Object[] squirellsVisualControls, PictureBox pictureBoxGrass, PictureBox pictureBoxSkySun, PictureBox pictureBoxMountain, PictureBox pictureBoxLake, int columnForCell, int rowForCell)
         {
+
+
             this.pictureBoxRain = (PictureBox)rainVisualControls[0];
             this.pictureBoxRain1 = (PictureBox)rainVisualControls[1];
             this.pictureBoxRain2 = (PictureBox)rainVisualControls[2];
@@ -298,6 +300,20 @@ namespace island
             this.pictureBoxLake.Location = new Point(offsetHorizontal, offsetVertical);
 
             this.context.Controls.Add(this.pictureBoxLake);
+        }
+
+        public void clearControls()
+        {
+            this.context.Controls.Remove((PictureBox)this.rainVisualControls[0]);
+            this.context.Controls.Remove((PictureBox)this.rainVisualControls[1]);
+            this.context.Controls.Remove((PictureBox)this.rainVisualControls[2]);
+            this.context.Controls.Remove((PictureBox)this.squirrelsVisualControls[0]);
+            this.context.Controls.Remove((PictureBox)this.squirrelsVisualControls[1]);
+            this.context.Controls.Remove((PictureBox)this.squirrelsVisualControls[2]);
+            this.context.Controls.Remove(this.pictureBoxGrass);
+            this.context.Controls.Remove(this.pictureBoxSkySun);
+            this.context.Controls.Remove(this.pictureBoxLake);
+            this.context.Controls.Remove(this.pictureBoxMountain);
         }
     }
 }

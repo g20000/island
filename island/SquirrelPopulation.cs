@@ -103,5 +103,12 @@ namespace island
         {
             return this.squirrelPopulationState;
         }
+
+        public void clearControls()
+        {
+            this.pictureBoxSquirrel = null;
+            this.pictureBoxSquirrel2 = null;
+            this.pictureBoxSquirrel3 = null;
+        }
     }
 }

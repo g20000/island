@@ -191,8 +191,8 @@ namespace island
         private bool isCellNearAbove(Cell cellSource, Cell cellDestionation)
         {
             return (
-                        (((cellDestionation.getRowForCell() - 1) >= 0) && ((cellDestionation.getRowForCell() - 1) == (cellSource.getRowForCell() - 1))) &&
-                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() + 1) == (cellSource.getColumnForCell() + 1)))
+                        (((cellDestionation.getRowForCell() - 1) >= 0) && (cellDestionation.getRowForCell() == (cellSource.getRowForCell() - 1))) &&
+                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() - 1) == cellSource.getColumnForCell()))
                    );
         }
 
@@ -200,7 +200,7 @@ namespace island
         {
             return (
                         (cellDestionation.getRowForCell() == cellSource.getRowForCell()) &&
-                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() + 1) == (cellSource.getColumnForCell() + 1))) &&
+                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() - 1) == cellSource.getColumnForCell())) &&
                         (cellDestionation.getColumnForCell() != cellSource.getColumnForCell())
                    );
         }
@@ -208,8 +208,8 @@ namespace island
         private bool isCellNearBottom(Cell cellSource, Cell cellDestionation)
         {
             return (
-                        (((cellDestionation.getRowForCell() + 1) > this.rowsCount) && ((cellDestionation.getRowForCell() + 1) == (cellSource.getRowForCell() + 1))) &&
-                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() + 1) == (cellSource.getColumnForCell() + 1)))
+                        (((cellDestionation.getRowForCell() + 1) > this.rowsCount) && (cellDestionation.getRowForCell() == (cellSource.getRowForCell() + 1))) &&
+                        (((cellDestionation.getColumnForCell() - 1) >= 0) && (cellDestionation.getColumnForCell() < this.columnCount) && ((cellDestionation.getColumnForCell() - 1) == cellSource.getColumnForCell()))
                    );
         }
 

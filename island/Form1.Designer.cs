@@ -104,6 +104,7 @@
             this.pictureBoxSquirrel2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxSquirrel2.TabIndex = 13;
             this.pictureBoxSquirrel2.TabStop = false;
+            this.pictureBoxSquirrel2.Click += new System.EventHandler(this.onSetSquirrelPopulationButtonTouched);
             // 
             // pictureBoxSquirrel3
             // 
@@ -114,6 +115,7 @@
             this.pictureBoxSquirrel3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxSquirrel3.TabIndex = 12;
             this.pictureBoxSquirrel3.TabStop = false;
+            this.pictureBoxSquirrel3.Click += new System.EventHandler(this.onSetSquirrelPopulationButtonTouched);
             // 
             // pictureBoxSquirrel
             // 
@@ -126,6 +128,7 @@
             this.pictureBoxSquirrel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxSquirrel.TabIndex = 11;
             this.pictureBoxSquirrel.TabStop = false;
+            this.pictureBoxSquirrel.Click += new System.EventHandler(this.onSetSquirrelPopulationButtonTouched);
             // 
             // pictureBoxLake
             // 
@@ -150,6 +153,7 @@
             this.pictureBoxMountain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxMountain.TabIndex = 6;
             this.pictureBoxMountain.TabStop = false;
+            this.pictureBoxMountain.Click += new System.EventHandler(this.onSetMountainButtonTouched);
             // 
             // pictureBoxRain3
             // 
@@ -163,6 +167,7 @@
             this.pictureBoxRain3.Size = new System.Drawing.Size(21, 20);
             this.pictureBoxRain3.TabIndex = 5;
             this.pictureBoxRain3.TabStop = false;
+            this.pictureBoxRain3.Click += new System.EventHandler(this.onSetRainButtonTouched);
             // 
             // pictureBoxRain2
             // 
@@ -176,6 +181,7 @@
             this.pictureBoxRain2.Size = new System.Drawing.Size(24, 20);
             this.pictureBoxRain2.TabIndex = 4;
             this.pictureBoxRain2.TabStop = false;
+            this.pictureBoxRain2.Click += new System.EventHandler(this.onSetRainButtonTouched);
             // 
             // pictureBoxRain
             // 
@@ -189,6 +195,7 @@
             this.pictureBoxRain.Size = new System.Drawing.Size(21, 20);
             this.pictureBoxRain.TabIndex = 3;
             this.pictureBoxRain.TabStop = false;
+            this.pictureBoxRain.Click += new System.EventHandler(this.onSetRainButtonTouched);
             // 
             // pictureBoxGrass
             // 
@@ -198,6 +205,7 @@
             this.pictureBoxGrass.Size = new System.Drawing.Size(211, 37);
             this.pictureBoxGrass.TabIndex = 2;
             this.pictureBoxGrass.TabStop = false;
+            this.pictureBoxGrass.Click += new System.EventHandler(this.onSetGrassStrengthButtonTouched);
             // 
             // pictureBoxSkySun
             // 
@@ -207,6 +215,7 @@
             this.pictureBoxSkySun.Size = new System.Drawing.Size(211, 34);
             this.pictureBoxSkySun.TabIndex = 1;
             this.pictureBoxSkySun.TabStop = false;
+            this.pictureBoxSkySun.Click += new System.EventHandler(this.onSetSunStrengthButtonTouched);
             // 
             // textBoxRows
             // 
@@ -276,6 +285,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.onSetRainButtonTouched);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquirrel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquirrel3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquirrel)).EndInit();

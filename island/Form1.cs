@@ -21,9 +21,13 @@ namespace island
         int rowsCount = 1;
         int columnCount = 1;
 
+        FormModalDialogRain formDialogRain = new FormModalDialogRain();
+
         public Form1()
         {
             InitializeComponent();
+
+            formDialogRain.rainStrengthSelected += mainApplicationFormThresholdReached;
 
             rainVisualControls = new Object[]{
                 pictureBoxRain,
@@ -55,7 +59,7 @@ namespace island
                 }
             }
 
-            hideCellPrototype();
+            //hideCellPrototype();
 
             foreach (Cell cell in this.cells)
             {
@@ -240,7 +244,8 @@ namespace island
 
         private void pictureBoxLake_Click(object sender, EventArgs e)
         {
-
+            Form f = new Form();
+            f.ShowDialog(this);
         }
 
         private void onSetRowsAndColumnsButtonTouched(object sender, EventArgs e)
@@ -260,6 +265,40 @@ namespace island
             this.cells.Clear();
 
             initCells();
+        }
+
+        static public void mainApplicationFormThresholdReached(object sender, MyEventArgs e)
+        {
+            Console.WriteLine("The threshold of {0}", e.intArgumnent);
+            Environment.Exit(0);
+        }
+
+        private void onSetRainButtonTouched(object sender, EventArgs e)
+        {
+            formDialogRain.ShowDialog(this);
+        }
+
+        private void onSetSunStrengthButtonTouched(object sender, EventArgs e)
+        {
+            Form f = new Form();
+            f.ShowDialog(this);
+        }
+
+        private void onSetGrassStrengthButtonTouched(object sender, EventArgs e)
+        {
+            Form f = new Form();
+            f.ShowDialog(this);
+        }
+
+        private void onSetMountainButtonTouched(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void onSetSquirrelPopulationButtonTouched(object sender, EventArgs e)
+        {
+            Form f = new Form();
+            f.ShowDialog(this);
         }
     }
 }

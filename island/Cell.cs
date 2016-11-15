@@ -110,6 +110,16 @@ namespace island
             return this.rainVisualControls;
         }
 
+        public Object[] getSquirrelVisualControls()
+        {
+            return this.squirrelsVisualControls;
+        }
+
+        public PictureBox getPictureBoxGrass()
+        {
+            return this.pictureBoxGrass;
+        }
+
         public Rain getRain()
         {
             return this.rain;
@@ -239,6 +249,10 @@ namespace island
         {
             PictureBox pictureBoxSquirrel = new PictureBox();
 
+            var eventsField = typeof(Component).GetField("events", BindingFlags.NonPublic | BindingFlags.Instance);
+            var eventHandlerList = eventsField.GetValue(pictureBoxSquirrelSource);
+            eventsField.SetValue(pictureBoxSquirrel, eventHandlerList);
+
             pictureBoxSquirrel.Size = pictureBoxSquirrelSource.Size;
             pictureBoxSquirrel.Image = pictureBoxSquirrelSource.Image;
             pictureBoxSquirrel.SizeMode = PictureBoxSizeMode.Zoom;
@@ -270,6 +284,10 @@ namespace island
         private void createPictureBoxGrass(PictureBox pictureBoxGrassSource)
         {
             this.pictureBoxGrass = new PictureBox();
+
+            var eventsField = typeof(Component).GetField("events", BindingFlags.NonPublic | BindingFlags.Instance);
+            var eventHandlerList = eventsField.GetValue(pictureBoxGrassSource);
+            eventsField.SetValue(this.pictureBoxGrass, eventHandlerList);
 
             this.pictureBoxGrass.Size = pictureBoxGrassSource.Size;
             this.pictureBoxGrass.BackColor = pictureBoxGrassSource.BackColor;

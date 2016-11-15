@@ -19,18 +19,23 @@ namespace island
         List<Cell> cells = new List<Cell>();
 
         private PictureBox selectedPictureBoxRain;
-        private Cell senderCell;
+        private PictureBox selectedPictureBoxSquirrel;
+        private PictureBox selectedPictureBoxGrass;
 
         int rowsCount = 1;
         int columnCount = 1;
 
         FormModalDialogRain formDialogRain = new FormModalDialogRain();
+        FormModalDialogSquirrelPopulation formDialogSquirrelPopulation = new FormModalDialogSquirrelPopulation();
+        FormModalDialogGrass formDialogGrass = new FormModalDialogGrass();
 
         public Form1()
         {
             InitializeComponent();
 
             formDialogRain.rainStrengthSelected += mainApplicationFormThresholdReached;
+            this.formDialogSquirrelPopulation.squirrelPopulationLevelSelected += mainApplicationFormSquirrelPopulationSelected;
+            this.formDialogGrass.grassLevelSelected += mainApplicationFormGrassLevelSelected;
 
             rainVisualControls = new Object[]{
                 pictureBoxRain,
@@ -62,7 +67,7 @@ namespace island
                 }
             }
 
-            //hideCellPrototype();
+            hideCellPrototype();
 
             foreach (Cell cell in this.cells)
             {
@@ -288,14 +293,61 @@ namespace island
             return null;
         }
 
+        private Cell cellContainsSenderPictureBoxSquirrel(PictureBox pictureBoxSquirrel)
+        {
+            foreach (Cell cell in this.cells)
+            {
+                Object[] squirrelVisualControls = cell.getSquirrelVisualControls();
+
+                foreach (Object squirrelVisualControl in squirrelVisualControls)
+                {
+                    if (squirrelVisualControl == pictureBoxSquirrel)
+                    {
+                        return cell;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private Cell cellContainsSenderPictureBoxGrass(PictureBox pictureBoxGrass)
+        {
+            foreach (Cell cell in this.cells)
+            {
+                PictureBox pictureBoxSelectedGrass = cell.getPictureBoxGrass();
+
+                if (pictureBoxSelectedGrass == pictureBoxGrass)
+                {
+                    return cell;
+                }
+            }
+
+            return null;
+        }
+
         public void mainApplicationFormThresholdReached(object sender, MyEventArgs e)
         {
-            Console.WriteLine("The threshold of {0}", e.intArgumnent);
-
             Cell cellWithSenderPictureBoxRain = cellContainsSenderPictureBoxRain(this.selectedPictureBoxRain);
             cellWithSenderPictureBoxRain.getRain().createRain(e.intArgumnent);
 
             this.formDialogRain.Close();
+        }
+
+        public void mainApplicationFormSquirrelPopulationSelected(object sender, MyEventArgs e)
+        {
+            Cell cellWithSenderPictureBoxSquirrel = cellContainsSenderPictureBoxSquirrel(this.selectedPictureBoxSquirrel);
+            cellWithSenderPictureBoxSquirrel.getSquirrelPopulation().createSquirrelPopulation(e.intArgumnent);
+
+            this.formDialogSquirrelPopulation.Close();
+        }
+
+        public void mainApplicationFormGrassLevelSelected(object sender, MyEventArgs e)
+        {
+            Cell cellWithSenderPictureBoxGrass = cellContainsSenderPictureBoxGrass(this.selectedPictureBoxGrass);
+            cellWithSenderPictureBoxGrass.getGrass().createGrass(e.intArgumnent);
+
+            this.formDialogGrass.Close();
         }
 
         private void onSetRainButtonTouched(object sender, EventArgs e)
@@ -313,8 +365,9 @@ namespace island
 
         private void onSetGrassStrengthButtonTouched(object sender, EventArgs e)
         {
-            Form f = new Form();
-            f.ShowDialog(this);
+            this.selectedPictureBoxGrass = (PictureBox)sender;
+
+            formDialogGrass.ShowDialog(this);
         }
 
         private void onSetMountainButtonTouched(object sender, EventArgs e)
@@ -324,8 +377,9 @@ namespace island
 
         private void onSetSquirrelPopulationButtonTouched(object sender, EventArgs e)
         {
-            Form f = new Form();
-            f.ShowDialog(this);
+            this.selectedPictureBoxSquirrel = (PictureBox)sender;
+
+            this.formDialogSquirrelPopulation.ShowDialog(this);
         }
     }
 }

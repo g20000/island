@@ -17,3 +17,5 @@ C:\Users\user\documents\visual studio 2015\Projects\island\island\bin\Debug\isla
 C:\Users\user\documents\visual studio 2015\Projects\island\island\obj\Debug\island.csprojResolveAssemblyReference.cache
 C:\Users\user\documents\visual studio 2015\Projects\island\island\obj\Debug\island.exe
 C:\Users\user\documents\visual studio 2015\Projects\island\island\obj\Debug\island.pdb
+C:\Users\user\documents\visual studio 2015\Projects\island\island\obj\Debug\island.FormModalDialogSquirrelPopulation.resources
+C:\Users\user\documents\visual studio 2015\Projects\island\island\obj\Debug\island.FormModalDialogGrass.resources

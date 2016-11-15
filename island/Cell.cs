@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace island
 {
@@ -101,6 +103,11 @@ namespace island
         public SquirrelPopulation getSquirrelPopulation()
         {
             return this.squirrelPopulation;
+        }
+
+        public Object[] getRainVisualControls()
+        {
+            return this.rainVisualControls;
         }
 
         public Rain getRain()
@@ -202,9 +209,14 @@ namespace island
         {
             PictureBox pictureBoxRain = new PictureBox();
 
+
             pictureBoxRain.Size = pictureBoxRainSource.Size;
             pictureBoxRain.Image = pictureBoxRainSource.Image;
             pictureBoxRain.SizeMode = PictureBoxSizeMode.Zoom;
+
+            var eventsField = typeof(Component).GetField("events", BindingFlags.NonPublic | BindingFlags.Instance);
+            var eventHandlerList = eventsField.GetValue(pictureBoxRainSource);
+            eventsField.SetValue(pictureBoxRain, eventHandlerList);
 
             int offsetHorizontal = pictureBoxRainSource.Location.X + this.pictureBoxGrass.Size.Width * columnForCell + (int)CellOffset.CellOffsetHorizontal;
             int offsetVertical = pictureBoxRainSource.Location.Y + (this.pictureBoxSkySun.Size.Height + this.pictureBoxGrass.Size.Height) * rowForCell + (int)CellOffset.CellOffsetVertical;

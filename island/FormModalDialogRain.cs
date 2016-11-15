@@ -23,7 +23,7 @@ namespace island
 
         private void FormModalDialogRain_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void onConfirmSelectionButtonTouched(object sender, EventArgs e)

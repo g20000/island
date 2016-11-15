@@ -18,6 +18,9 @@ namespace island
         Object[] squirrelsVisualControls = null;
         List<Cell> cells = new List<Cell>();
 
+        private PictureBox selectedPictureBoxRain;
+        private Cell senderCell;
+
         int rowsCount = 1;
         int columnCount = 1;
 
@@ -267,14 +270,38 @@ namespace island
             initCells();
         }
 
-        static public void mainApplicationFormThresholdReached(object sender, MyEventArgs e)
+        private Cell cellContainsSenderPictureBoxRain(PictureBox pictureBoxRain)
+        {
+            foreach(Cell cell in this.cells)
+            {
+                Object[] rainVisualControls = cell.getRainVisualControls();
+
+                foreach(Object rainVisualControl in rainVisualControls)
+                {
+                    if(rainVisualControl == pictureBoxRain)
+                    {
+                        return cell;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public void mainApplicationFormThresholdReached(object sender, MyEventArgs e)
         {
             Console.WriteLine("The threshold of {0}", e.intArgumnent);
-            Environment.Exit(0);
+
+            Cell cellWithSenderPictureBoxRain = cellContainsSenderPictureBoxRain(this.selectedPictureBoxRain);
+            cellWithSenderPictureBoxRain.getRain().createRain(e.intArgumnent);
+
+            this.formDialogRain.Close();
         }
 
         private void onSetRainButtonTouched(object sender, EventArgs e)
         {
+            this.selectedPictureBoxRain = (PictureBox)sender;
+
             formDialogRain.ShowDialog(this);
         }
 

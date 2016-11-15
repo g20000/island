@@ -65,6 +65,12 @@
     <Compile Include="FormModalDialogRain.Designer.cs">
       <DependentUpon>FormModalDialogRain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormModalDialogSkySun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModalDialogSkySun.Designer.cs">
+      <DependentUpon>FormModalDialogSkySun.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormModalDialogSquirrelPopulation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormModalDialogRain.resx">
       <DependentUpon>FormModalDialogRain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModalDialogSkySun.resx">
+      <DependentUpon>FormModalDialogSkySun.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormModalDialogSquirrelPopulation.resx">
       <DependentUpon>FormModalDialogSquirrelPopulation.cs</DependentUpon>

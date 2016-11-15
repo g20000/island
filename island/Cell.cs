@@ -120,6 +120,11 @@ namespace island
             return this.pictureBoxGrass;
         }
 
+        public PictureBox getPictureBoxSkySun()
+        {
+            return this.pictureBoxSkySun;
+        }
+
         public Rain getRain()
         {
             return this.rain;
@@ -269,6 +274,10 @@ namespace island
         private void createPictureBoxSkySun(PictureBox pictureBoxSkySunSource)
         {
             this.pictureBoxSkySun = new PictureBox();
+
+            var eventsField = typeof(Component).GetField("events", BindingFlags.NonPublic | BindingFlags.Instance);
+            var eventHandlerList = eventsField.GetValue(pictureBoxSkySunSource);
+            eventsField.SetValue(pictureBoxSkySun, eventHandlerList);
 
             this.pictureBoxSkySun.Size = pictureBoxSkySunSource.Size;
             this.pictureBoxSkySun.BackColor = pictureBoxSkySunSource.BackColor;

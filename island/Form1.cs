@@ -21,6 +21,7 @@ namespace island
         private PictureBox selectedPictureBoxRain;
         private PictureBox selectedPictureBoxSquirrel;
         private PictureBox selectedPictureBoxGrass;
+        private PictureBox selectedPictureBoxSkySun;
 
         int rowsCount = 1;
         int columnCount = 1;
@@ -28,6 +29,7 @@ namespace island
         FormModalDialogRain formDialogRain = new FormModalDialogRain();
         FormModalDialogSquirrelPopulation formDialogSquirrelPopulation = new FormModalDialogSquirrelPopulation();
         FormModalDialogGrass formDialogGrass = new FormModalDialogGrass();
+        FormModalDialogSkySun formModalSkySun = new FormModalDialogSkySun();
 
         public Form1()
         {
@@ -36,6 +38,7 @@ namespace island
             formDialogRain.rainStrengthSelected += mainApplicationFormThresholdReached;
             this.formDialogSquirrelPopulation.squirrelPopulationLevelSelected += mainApplicationFormSquirrelPopulationSelected;
             this.formDialogGrass.grassLevelSelected += mainApplicationFormGrassLevelSelected;
+            this.formModalSkySun.skySunLevelSelected += mainApplicationFormSkySunLevelSelected;
 
             rainVisualControls = new Object[]{
                 pictureBoxRain,
@@ -326,6 +329,21 @@ namespace island
             return null;
         }
 
+        private Cell cellContainsSenderPictureBoxSkySun(PictureBox pictureBoxSkySun)
+        {
+            foreach (Cell cell in this.cells)
+            {
+                PictureBox pictureBoxSelectedSkySun = cell.getPictureBoxSkySun();
+
+                if (pictureBoxSelectedSkySun == pictureBoxSkySun)
+                {
+                    return cell;
+                }
+            }
+
+            return null;
+        }
+
         public void mainApplicationFormThresholdReached(object sender, MyEventArgs e)
         {
             Cell cellWithSenderPictureBoxRain = cellContainsSenderPictureBoxRain(this.selectedPictureBoxRain);
@@ -350,6 +368,14 @@ namespace island
             this.formDialogGrass.Close();
         }
 
+        public void mainApplicationFormSkySunLevelSelected(object sender, MyEventArgs e)
+        {
+            Cell cellWithSenderPictureBoxSkySun = cellContainsSenderPictureBoxSkySun(this.selectedPictureBoxSkySun);
+            cellWithSenderPictureBoxSkySun.getSun().createSun(e.intArgumnent);
+
+            this.formModalSkySun.Close();
+        }
+
         private void onSetRainButtonTouched(object sender, EventArgs e)
         {
             this.selectedPictureBoxRain = (PictureBox)sender;
@@ -359,8 +385,9 @@ namespace island
 
         private void onSetSunStrengthButtonTouched(object sender, EventArgs e)
         {
-            Form f = new Form();
-            f.ShowDialog(this);
+            this.selectedPictureBoxSkySun = (PictureBox)sender;
+
+            this.formModalSkySun.ShowDialog(this);
         }
 
         private void onSetGrassStrengthButtonTouched(object sender, EventArgs e)
